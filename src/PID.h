@@ -1,8 +1,13 @@
+#include <deque>
+
 #ifndef PID_H
 #define PID_H
 
 class PID {
 public:
+  double prev_cte;
+  std::deque<double> cte_history;
+
   /*
   * Errors
   */
@@ -12,7 +17,7 @@ public:
 
   /*
   * Coefficients
-  */ 
+  */
   double Kp;
   double Ki;
   double Kd;
@@ -41,6 +46,12 @@ public:
   * Calculate the total PID error.
   */
   double TotalError();
+
+  double GetSteer();
+
+  double SumHistoryCte();
+
+  double SumHistoryCte2();
 };
 
 #endif /* PID_H */
